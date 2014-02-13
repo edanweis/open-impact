@@ -320,7 +320,7 @@ def analyse():
 	elif os.path.isdir("/home/edanweis/webapps/oi3/oi3"):
 		NLTK_DATA_PATH = ["/home/edanweis/webapps/oi3/oi3"]
 	else:
-		answer = "no NLTK found"
+		answer = "no NLTK found" 
 	
 	try:
 		answer = quepy.nltktagger.run_nltktagger(urllib.unquote(question), NLTK_DATA_PATH)
