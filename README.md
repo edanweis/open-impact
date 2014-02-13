@@ -2,7 +2,7 @@ open-impact
 ===========
 
 
- 
+  
 
 Edan's notes
 ---
