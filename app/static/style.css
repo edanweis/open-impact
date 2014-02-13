@@ -228,6 +228,13 @@ li.active.hanging a[href="#meta"], li.hanging a[href="#meta"]:hover, li.hanging.
 	color: #FBC200;
 }
 
+li.active.hanging a[href="#analysis"], li.hanging a[href="#analysis"]:hover, li.hanging.active a[href="#analysis"]:hover {
+	background-color: #fff;
+	border-top: 4px rgba(102, 70, 230, 0.75) solid;
+	color: #6646E6;
+}
+
+
 
 .white-band{
 	background-color: #fff;

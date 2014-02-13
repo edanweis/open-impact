@@ -29,7 +29,7 @@ Open Impact
 6. Voila! see it at: http://localhost:5000
 
 
-### Todo
+### Todo: features
 
 Task | Dependencies | Priority
 --- | --- | ---
@@ -38,6 +38,13 @@ Secure Oath / OpenId login |  | High
 "About us" page | Photo from Nrupak | Medium
 Search by tag | | High
 
+
+### Todo: bugs/technical changes
+
+Task | why | Priority
+--- | --- | ---
+Implement Post/Redirect/Get pattern | Prevent form resubmission on reload | High
+Use ajax for tags, and profile forms | faster, no page reload necessary | Medium
 
 
 ### Note

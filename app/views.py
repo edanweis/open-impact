@@ -9,6 +9,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 
 import gspread
 import quepy
+from quepy import nltktagger
 import urllib
 import re, os
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -162,6 +163,8 @@ def query():
 	# Initialise variables // move out of function and make them global?
 	query=None
 	answer=None
+	analysis=None
+	tokens = []
 	alert=None
 	log=None
 	asks = 444
@@ -179,8 +182,29 @@ def query():
 	form = QuestionForm()
 	tag_form = TagForm()
 
+	# Get NLTK DATA PATH for tokenizing analysis
+	if os.path.isdir("C:/Users/edanw_000/My Programming libraries/ntlk/"):
+		NLTK_DATA_PATH = ["C:/Users/edanw_000/My Programming libraries/ntlk/"]
+	elif os.path.isdir("/home/edanweis/webapps/oi3/oi3"):
+		NLTK_DATA_PATH = ["/home/edanweis/webapps/oi3/oi3"]
+	else:
+		answer = "no NLTK found"
+
 	# Checks if the GET value exists
 	if question:
+
+		# Analyse question.
+		analysis = quepy.nltktagger.run_nltktagger(urllib.unquote(question), NLTK_DATA_PATH)
+		tokens_length = len(analysis)
+		for child in analysis:
+			token = {}
+			token["token"] = str(child.token)
+			token["POS"] = str(child.pos)
+			token["lema"]= str(child.lemma)
+			token["prob"]= str(child.prob)
+			tokens.append(token)
+		
+		# Answer question
 		quepy_process = functions.quepyProcess(question)    # Process the quesiton with Quepy
 		query, answer = quepy_process[0], quepy_process[1]     # assign results to variables.
 		existing_query = Query.query.filter_by(sparql_id = query.sparql_id).first()
@@ -244,9 +268,6 @@ def query():
 	# else:
 	# 	alert = "Try again"
 
-	
-
-
 	return render_template('query.html',
 		all_tags=all_tags,
 		tag_form = tag_form,
@@ -263,8 +284,9 @@ def query():
 		existing_query = existing_query, 
 		title= title, 
 		now=datetime.utcnow(), 
-		tab=tabs)
-	
+		tab=tabs, 
+		analysis=tokens)
+
 
 
 
