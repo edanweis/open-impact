@@ -54,13 +54,12 @@
             <!-- <span class="fa fa-caret-down"></span></a> -->
             <ul class="dropdown-menu">
               <li><a href="{{ url_for('query') }}"><i class="fa fa-search fa-flip-horizontal fa-fw"></i> Query</a></li>
-              <li><a href="{{ url_for('analyse') }}"><i class="fa fa-wrench fa-fw"></i> Analyse</a></li>
               <li class="divider"></li>
               <li><a href="{{ url_for('user', nickname = g.user.nickname) }}"><i class="fa fa-picture-o fa-fw"></i> My Profile</a></li>
               <li><a href="{{ url_for('log') }}"><i class="fa fa-align-justify fa-fw"></i> Log</a></li>
-              <li class="disabled"><a href="#"><i class="fa  fa-question fa-fw"></i> FAQ</a></li>
+              <!-- <li class="disabled"><a href="#"><i class="fa  fa-question fa-fw"></i> FAQ</a></li>
               <li class="disabled"><a href="#"><i class="fa fa-fw fa-cog"></i> Ontology</a></li>
-              <li class="disabled"><a href="#"><i class="fa fa-check-square-o fa-fw"></i> Get involved!</a></li>
+              <li class="disabled"><a href="#"><i class="fa fa-check-square-o fa-fw"></i> Get involved!</a></li> -->
               <li><a href="{{ url_for('team') }}"><i class="fa fa-smile-o fa-fw "></i> Our team</a></li>
               <li class="divider"></li>
               <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Sign out</a></li>
@@ -70,9 +69,9 @@
             <a class="btn btn-default" href="#" data-toggle="dropdown"><i class="fa fa-sign-in fa-fw"></i> Start here! &nbsp; &nbsp; &nbsp;<i class="fa fa-bars"></i></a>
             <ul class="dropdown-menu">
               <li><a href="{{ url_for('login') }}"><i class="fa fa-sign-in fa-fw"></i> Sign In</a></li>
-              <li class="disabled"><a href="#"><i class="fa  fa-question fa-fw "></i> FAQ</a></li>
+              <!-- <li class="disabled"><a href="#"><i class="fa  fa-question fa-fw "></i> FAQ</a></li>
               <li class="disabled"><a href="#"><i class="fa fa-fw fa-cog "></i> Ontology</a></li>
-              <li class="disabled"><a href="#"><i class="fa fa-check-square-o fa-fw "></i> Get involved!</a></li>
+              <li class="disabled"><a href="#"><i class="fa fa-check-square-o fa-fw "></i> Get involved!</a></li> -->
               <li><a href="{{ url_for('team') }}"><i class="fa fa-smile-o fa-fw "></i> Our team</a></li>
             </ul>
             {% endif %}
