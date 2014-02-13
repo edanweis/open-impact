@@ -26,6 +26,8 @@
 </div>
 
 
+		
+	
 
 {% endblock content %}
 {% block results %}
@@ -37,135 +39,8 @@
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane in active" id="results">
-			
-
-			<table class="table table-bordered select top-buffer-lg">
-				<thead>
-					<tr>
-						<th><strong>Word No.</strong></th>
-						{% for token in tokens %}						
-						<th>{{ loop.index }}</th>
-						{% endfor %}
-					</tr>
-				</thead>
-				<tbody id="analysisTable">
-
-
-					<tr>
-						<th><strong>Original: </strong></th>
-						{% for token in tokens %}						
-						<th>{{token['token']}}</th>
-						{% endfor %}
-					</tr>
-
-
-					<tr>
-						<th><strong>Lemmatized: </strong></th>
-						{% for token in tokens %}						
-						<th>{{token['lema']}}</th>
-						{% endfor %}
-					</tr>
-
-					<tr>
-						<th><strong>Parts of speech:</strong></th>
-						{% for token in tokens %}						
-						<th>{{ tag[token['POS']]  }}</th>
-						{% endfor %}
-					</tr>
-
-				</tbody>
-			</table>
-
-
-			<table class="table table-striped select table-bordered table-condensed top-buffer-lg">
-				<thead >
-					<tr><th >Tag</th>
-						<th >Meaning</th>
-						<th >Examples</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr><td><tt >ADJ</span></tt></td>
-						<td>adjective</td>
-						<td><span >new, good, high, special, big, local</span></td>
-					</tr>
-					<tr><td><tt >ADV</span></tt></td>
-						<td>adverb</td>
-						<td><span >really, already, still, early, now</span></td>
-					</tr>
-					<tr><td><tt >CNJ</span></tt></td>
-						<td>conjunction</td>
-						<td><span >and, or, but, if, while, although</span></td>
-					</tr>
-					<tr><td><tt >DET</span></tt></td>
-						<td>determiner</td>
-						<td><span >the, a, some, most, every, no</span></td>
-					</tr>
-					<tr><td><tt >EX</span></tt></td>
-						<td>existential</td>
-						<td><span >there, there's</span></td>
-					</tr>
-					<tr><td><tt >FW</span></tt></td>
-						<td>foreign word</td>
-						<td><span >dolce, ersatz, esprit, quo, maitre</span></td>
-					</tr>
-					<tr><td><tt >MOD</span></tt></td>
-						<td>modal verb</td>
-						<td><span >will, can, would, may, must, should</span></td>
-					</tr>
-					<tr><td><tt >N</span></tt></td>
-						<td>noun</td>
-						<td><span >year, home, costs, time, education</span></td>
-					</tr>
-					<tr><td><tt >NP</span></tt></td>
-						<td>proper noun</td>
-						<td><span >Alison, Africa, April, Washington</span></td>
-					</tr>
-					<tr><td><tt >NUM</span></tt></td>
-						<td>number</td>
-						<td><span >twenty-four, fourth, 1991, 14:24</span></td>
-					</tr>
-					<tr><td><tt >PRO</span></tt></td>
-						<td>pronoun</td>
-						<td><span >he, their, her, its, my, I, us</span></td>
-					</tr>
-					<tr><td><tt >P</span></tt></td>
-						<td>preposition</td>
-						<td><span >on, of, at, with, by, into, under</span></td>
-					</tr>
-					<tr><td><tt >TO</span></tt></td>
-						<td>the word <span >to</span></td>
-						<td><span >to</span></td>
-					</tr>
-					<tr><td><tt >UH</span></tt></td>
-						<td>interjection</td>
-						<td><span >ah, bang, ha, whee, hmpf, oops</span></td>
-					</tr>
-					<tr><td><tt >V</span></tt></td>
-						<td>verb</td>
-						<td><span >is, has, get, do, make, see, run</span></td>
-					</tr>
-					<tr><td><tt >VD</span></tt></td>
-						<td>past tense</td>
-						<td><span >said, took, told, made, asked</span></td>
-					</tr>
-					<tr><td><tt >VG</span></tt></td>
-						<td>present participle</td>
-						<td><span >making, going, playing, working</span></td>
-					</tr>
-					<tr><td><tt >VN</span></tt></td>
-						<td>past participle</td>
-						<td><span >given, taken, begun, sung</span></td>
-					</tr>
-					<tr><td><tt >WH</span></tt></td>
-						<td><span >wh</span> determiner</td>
-						<td><span >who, which, when, what, where, how</span></td>
-					</tr>
-				</tbody>
-			</table>
-
-			<!-- <a class="btn btn-default pos" data-toggle="tooltip" title="first tooltip">asdf</a> -->
-
+				
+dfasdfasdfasdf
 
 		</div>
 
