@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Open Impact 2014</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Le styles -->
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link href="{{ url_for('static', filename="animate-custom.css") }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename="bootstrap/css/bootstrap.min.css") }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename="logo.css") }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename="fonts.css") }}" rel="stylesheet">
+  <!-- <link href="{{ url_for('static', filename="font-awesome.min.css") }}" rel="stylesheet"> -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename="prettify.css") }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename="style.css") }}" rel="stylesheet">
+  
+
+  <style>
+  body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+  }
+  </style>
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+    <div class="row">
+
+    </div>
+    <div id="wrap">
+      <div class="container">
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes animated slideInDown">
+          {% for message in messages %}
+          <div class="alert alert-success alert-dismissable top-buffer">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{ message }}
+          </div>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <div class="row">
+          <div class="logo-vertical-spacer"></div>
+          <!-- start logo -->
+          <div class="logo-container">
+            <svg id="chart" width="100%" height="340" viewBox="0 0 340 340" perserveAspectRatio="xMinYMid" class="chart"></svg>
+          </div>
+          <div class="logo-text">
+            O<div style="margin-left:-0.07em; display:inline">P</div><div style="margin-left:-0.07em; display:inline">E</div>N    IMP<div style="margin-left:-0.07em; display:inline">A</div><div style="margin-left:-0.07em; display:inline">C</div><div style="margin-left:-0.07em; display:inline">T</div>
+            <!-- <span style="font-family: ALPHA-Regular; font-size: 1em; color:#577AE0 !important; margin-left:0.1em; text-shadow: none">a</span> -->
+          </div>
+          <!-- end logo -->
+        </div>
+
+        <div class="row">
+          <p class="text-center top-buffer-lg slogan">Free and Open Data on the social impact of design</p>
+
+          <div class="row animated fadeInUp">
+            <div class="col-md-6 col-md-offset-3 top-buffer-lg">
+
+             <!-- <div class="panel" style="border:1px solid #ccc  ">
+              <div class="panel-heading"></div>
+              <div class="panel-body">
+                <p><strong>Open Impact helps designers working in social innovation and development design better with data</strong></p>
+                <p>We're currently in development, but check back soon for the beta launch in April 2014</p>
+                <p>What do we do?</p>
+                <p><ul>
+                  <li>We demonstrate the value of using and publishing Open Data within the design community.</li>
+                  <li>We supply Open Data which facilitates decision making, information sharing and reporting to improve design for social innovation and development.</li>
+                  <li>We allow the community direct input into the development of design-specific Open Data requirements, licensing and privacy controls.</li>
+                </ul>
+              </div>
+            </div> -->
+
+          
+          {% if form %}
+
+            <form action="" class="form form-horizontal" method="post" role="form" name="email">
+              <div class="input-group input-group-lg">       
+                {{form.hidden_tag()}}
+                {{form.email(size=30, id='email-input', class_='form-control', placeholder='Your email')}}
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-default" id="email-button"><i class="fa fa-envelope-o"></i> Notify me!</button>
+                </span>
+              </div>
+              <h4 class="text-center" style="margin-top:1em">Sign up to our beta launch</h4>
+              <p>
+                {% for error in form.errors.question %}
+                <!-- <div class="alert alert-warning">[{{error}}]</div> -->
+                {% endfor %}
+                {% for error in form.errors.email %}
+                <div class="alert alert-warning">{{error}}</div>
+                {% endfor %}
+              </p>
+            </form>
+            {% else %}
+            <h4 class="text-center" style="margin-top:1em"><i class="fa fa-fw fa-check" style="color:#81BF57"></i> Thanks, we'll keep you updated.</h4>
+            
+            {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- footer without results -->
+    </div> <!-- /container -->
+  </div> <!-- /wrap -->
+  <div id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+          <p>Querying over 382,888 facts about social design<br/>
+            <ul class="list-inline">
+              <li><a href="mailto:hello@open-impact.org">Contact us</a></li>
+<!--                     <li><a href="#">Privacy & Terms</a></li>
+                    <li><a href="#">Acknowledgements</a></li>
+                    <li><a href="#">Contact</a></li> -->
+                  </ul>
+                </p>
+              </div>
+              <div class="col-md-4">
+                <ul class="list-unstyled text-right">
+                  <li style="margin-bottom:1em;"><!-- Open Data Link -->
+                    <a href="http://opendefinition.org/">
+                      <img alt="This material is Open Data" border="0"
+                      src="http://assets.okfn.org/images/ok_buttons/od_80x15_blue.png" />
+                    </a>
+                    <!-- /Open Data Link -->
+                  </li>
+                  <li class="text-right">2014 OPEN-IMPACT.org</li>
+                  <!-- <li>Powered by <a href="#">Stardog</a></li> -->
+                </ul>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+<!-- Le javascript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}"></script>
+  <script src="{{ url_for('static', filename="d3v2.js") }}"></script>
+  <script src="{{ url_for('static', filename="logo.js") }}"></script>
+  <script src="{{ url_for('static', filename="script.js") }}"></script>
+  <script src="{{ url_for('static', filename="moment-min.js") }}"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link href="{{ url_for('static', filename="select2/select2.css") }}" rel="stylesheet">
+<link href="{{ url_for('static', filename="select2-bootstrap.css") }}" rel="stylesheet">
+{% endblock css %}
+
+
+{% block logo %}
+<div class="logo-vertical-spacer"></div> <!-- start logo --> <div class="logo-container"> <svg id="chart" width="100%" height="340" viewBox="0 0 340 340" perserveAspectRatio="xMinYMid" class="chart"></svg> </div> <div class="logo-text"> O<div style="margin-left:-0.07em; display:inline">P</div><div style="margin-left:-0.07em; display:inline">E</div>N IMP<div style="margin-left:-0.07em; display:inline">A</div><div style="margin-left:-0.07em; display:inline">C</div><div style="margin-left:-0.07em; display:inline">T</div> <!-- <span style="font-family: ALPHA-Regular; font-size: 1em; color:#577AE0 !important; margin-left:0.1em; text-shadow: none">a</span> --> </div> <!-- end logo -->
+{% endblock logo %}
+
+
+{% block content %}
+
+<div class="container text-center">
+	<div class="col-md-10 col-md-offset-1">
+		<form action="query" style=" margin-left:2.5em; margin-top:80px"class="form form-horizontal" method="get" role="form" name="question">
+			{% if alert %}
+			<div class="input-group animated shake">       
+				{% else %}
+				<div class="input-group">       
+					{% endif %}	
+					{{form.question(size=10, id='search-input', class_='form-control', placeholder='', value=query.question)}}
+					<span class="input-group-btn">
+						<button type="submit" id="search-button" style="position:relative; left:-45px" class=""><i style="font-size: 2em; color: #444444; cursor: pointer" class="fa fa-flip-horizontal fa-search"></i></button>
+					</span>
+
+				</div>
+				<p class="text-left" style="margin-top:1em;">
+					
+					{{form.record(id='record-checkbox')}} Get better results, let us record your search anonymously. <a id="anon-record" style="font-size:0.8em" href="#"> learn more</a>
+				</p>
+				<p>
+					{% for error in form.errors.question %}
+					<!-- <div class="alert alert-warning">[{{error}}]</div> -->
+					{% endfor %}
+					
+				</p>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+{% endblock content %}
+{% block results %}
+
+	
+
+<div class="col-md-8 col-md-offset-2 selectable">
+	<ul class="nav nav-pills">
+		{% if query.success %}
+			<li class="{{tab['results']}} hanging"><a href="#results" data-toggle="tab"><i class="fa fa-bars"></i> Results</a></li>
+			<li class="{{tab['sparql']}} hanging"><a href="#sparql" data-toggle="tab"><i class="fa fa-code"></i> SPARQL</a></li>
+			<li class="{{tab['meta']}} hanging"><a href="#meta" data-toggle="tab"><i class="fa fa-table"></i> Meta</a></li>
+			<li class="{{tab['talk']}} hanging"><a href="#talk" data-toggle="tab"><i class="fa fa-comment-o"></i> Talk</a></li>
+		{% endif %}
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane in {{tab['results']}}" id="results">
+			
+			<p>	
+				<p class="top-buffer"><h2>{{ answer }}</h2></p>
+
+<p class="top-buffer-lg">Share these results</p>
+			<p>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="opendata" data-dnt="true">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</p>
+
+
+			
+				<p>Errors: {{ query.errors }}</p>
+				<p>Votes: {{ query.votes }}</p>
+				<p>Timestamp: {{ query.timestamp }}</p>
+				
+				
+				
+
+			</p>
+		</div>
+		<div class="tab-pane top-buffer {{tab['sparql']}}" id="sparql">
+
+			<p><strong>SPARQL 1.1 Protocol and RDF Query Language</strong> <a style="font-size:0.8em" href="#">(What's this?)</a></p>
+			<pre class="prettyprint lang-sparql">
+				{{ query.sparql_code }}
+			</pre>
+
+
+		</div>
+		
+		<div class="tab-pane top-buffer {{tab['meta']}}" id="meta">
+
+
+
+
+			<table class="table">
+				<tr>
+					<td>SPARQL Endpoint URL</td>
+					<td>http://115.146.84.150/annex/openimpact/sparql/query</td>
+				</tr>
+				<tr>
+					<td>Database name</td>
+					<td>openimpact</td>
+				</tr>
+				<tr>
+					<td>Namespace</td>
+					<td>oi: http://www.purl.org/open-impact/</td>
+				</tr>
+				<tr>
+					<td>Database Last Modified</td>
+					<td>2014-01-07T10:07:09.905Z</td>
+				</tr>
+				<tr>
+					<td>Data source(s)</td>
+					<td>   http://hcdconnect.org/profiles<br/>   http://openarchitecturenetwork.org/<br/>   http://www.dellchallenge.org/<br/>   http://www.openideo.com/<br/>   http://www.design21sdn.com/<br/>   http://hcdconnect.org/stories<br/>   http://hcdconnect.org/ask<br/>   http://ande.force.com<br/>https://www.engineeringforchange.org/<br/>http://www.acumenfund.org/investments.html<br/>   http://archive.cooperhewitt.org/other90/other90.cooperhewitt.org/Design<br/>   http://www.techpedia.in/</td>
+				</tr>
+				<tr>
+					<td>ICV Reasoning Type</td>
+					<td>EL</td>
+				</tr>
+				<tr>
+					<td>Index Size (Triples)</td>
+					<td>379749</td>
+				</tr>
+				<tr>
+					<td>Privacy protection</td>
+					<td>Enabled, see our policy</td>
+				</tr>
+			</table>
+
+		</div>
+
+		<div class="tab-pane top-buffer {{tab['talk']}}" id="talk">
+			<p>
+				{% if existing_query %}
+				<h2>This question was asked {{query.asks}} times since {{ moment(query.timestamp).fromTime(now) }}</h2>
+				
+				{% else %}
+				
+				<h2>Wow, you're the first person that's asked us that.</h2>				
+				{% endif %}
+			</p>
+			<p class="top-buffer"> <h4>Was it useful?</h4> </p>
+			<button type="button" href="" id="helpful_yes" class="btn btn-sm btn-success"><i class="fa fa-check"></i> YES</button>
+			<button type="button" href="" id="helpful_no" class="btn btn-sm btn-danger"><i class="fa fa-times"></i> NO</button>
+			<div class="top-buffer"></div>
+			<p><h4> Share it with others by tagging it </h4></p>
+			
+			<form role="form" action="" method="post" name="tag" style="width:100%">
+				<div class="input-group">  
+					{{tag_form.hidden_tag()}}
+					{{tag_form.tag(size = 24, class_='form-control')}}
+					<span class="input-group-btn" style="vertical-align:top !important; left:-1px;">
+						<button type="submit" class="btn btn-default" style="line-height: 2em"><i class="fa fa-save"></i> tags</button>
+					</span>
+				</div>
+
+			</form>
+			
+			
+			
+<!-- 			<h3>Tags</h3>
+			<ul>
+				{% for tag in query.tags %}
+				<h4><span class="label label-info">{{tag.name}} x {{tag.tag_cnt}}</span></h4>
+				{% endfor %}
+			</ul>
+
+		-->
+
+
+
+		<div class="top-buffer-lg"></div>
+
+		<h2>Add your comments</h2>
+		
+		<div id="disqus_thread"></div>
+		<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'open-impact'; // required: replace example with your forum shortname
+        var disqus_identifier = '{{ query.sparql_id }}';
+        var disqus_title = '{{ query.question }}';
+        var disqus_disable_mobile = true;
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        	dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the comments</noscript>
+        
+        <div class="top-buffer-lg"></div>
+       <!--  <ul>
+        	<li>factual error reports</li>
+        	<li>votes on importance</li>
+        	<li>related queries</li>
+        	<li>permalink</li>
+        	<li>public sparql endpoint query</li>
+        	<li>date asked</li>
+        	
+        	
+        </ul> -->
+    </div>	
+
+</div>
+<!-- end tab content -->
+</div>
+
+{% endblock results %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename="select2/select2.js") }}"></script>  
+<script src="{{ url_for('static', filename="script-query.js") }}"></script>
+
+<script>
+$(document).ready(function(){
+
+	$("#tag").val({{tag_list|safe}}).select2({
+		tags:{{remaining_tags|safe}},
+		tokenSeparators: [",", " "], 
+		maximumInputLength: 20, 
+		width: "copy"
+	});
+
+});
+
+</script>
+
+{% endblock scripts %}
+

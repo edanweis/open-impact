@@ -1,0 +1,73 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+
+{% block logo %}
+{% endblock logo %}
+
+{% block content %}
+
+{% for error in form.errors.nickname %}
+<ul class="flashes animated slideInDown">  
+  <div class="alert alert-error alert-dismissable top-buffer">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{error}}
+  </div>
+</ul>
+{% endfor %}
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 top-buffer-lg">
+    <div class="panel panel-success">
+
+      <div class="panel-heading"><i class="fa fa-user fa-fw"></i> {{user.nickname}} - Profile {% if user.id == g.user.id %}{% endif %}</div>
+
+      <div class="panel-body">
+        <a href="#" class="thumbnail pull-left " style="margin:1em 0em 0 1em">
+          <img data-src="holder.js/128x128" src="{{user.avatar(128)}}" alt="Avatar"/>
+        </a>
+
+        <div style="margin:1em" class="pull-right">
+
+          <form role="form" action="" method="post" name="edit">
+            {{form.hidden_tag()}}
+            <div class="form-group">
+              <label>Username</label>
+              {{form.nickname(size = 14, class_='form-control')}}
+            </div>
+            <div class="form-group">
+              <label>About</label>
+              {{form.about_me(cols = 60, rows = 4, class_='form-control')}}
+            </div>
+            <a type="link" href="{{ url_for('user', nickname = g.user.nickname) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i> Back</a>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i> Save changes</button>
+          </form>
+        </div>  
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-heading"><i class="fa fa-list-ul fa-fw"></i> Queries</div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody id="userLogTable">
+           {% for log in logs %}
+           <tr>
+            <th><p>{{log.nlq}}</p></th>
+            <th>query again</th>
+            {% endfor %}
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-md-12 text-left">
+        <ul class="pagination" id="myPager"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

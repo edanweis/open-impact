@@ -1,0 +1,86 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block css %}
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//cdn.datatables.net/plug-ins/f3e99a6c02/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12 top-buffer-lg">
+    <div class="panel panel-success">
+
+      <div class="panel-heading"><i class="fa fa-align-justify fa-fw"></i> Query log</div>
+
+      <div class="panel-body">
+
+       <table id="log-table" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>SPARQL</th>
+            <th>Time</th>
+            <th>Successful result</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+          <tr>
+           <th>{{ log.nlq }}</th>
+           {% if log.sparql %}
+           <th>
+
+
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse-next" >
+              Show SPARQL
+            </button>
+
+            <div class="collapse">
+              <p>
+                <pre class="prettyprint lang-sparql">{{ log.sparql }}</pre>
+              </p>
+            </div>
+            <div class="collapse in">
+              <pre class="prettyprint lang-sparql" style="height:0px !important; line-height: 0px !important; visibility:hidden !important;">{{ log.sparql }}</pre>
+            </div>
+
+
+          </th>
+          {% else %}
+          <th></th>
+          {% endif %}
+          <th>
+
+            <div id="timestamp"></div>
+            
+            {{ moment(log.timestamp).fromTime(now) }}</th>
+            <th>
+              {% if log.success %}
+              <i style="color:#8BC848"class="fa fa-check"></i>
+              {% else %}
+              <i style="color:#FE653F" class="fa fa-times"></i>
+              {% endif %}
+
+            </th>
+            <th><a href="{{ url_for('user', nickname = log.author.nickname) }}" title="user" >{{ log.author.nickname }}</a></th>
+          </tr>
+          {% endfor %}          
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+
+</div>
+</div>
+{% endblock content %}
+
+
+{% block scripts %}
+  <script src="//cdn.datatables.net/1.10.0-beta.1/js/jquery.dataTables.js"></script> 
+  <script src="//cdn.datatables.net/plug-ins/f3e99a6c02/integration/bootstrap/3/dataTables.bootstrap.js"></script> 
+  <script src="{{ url_for('static', filename="script-log.js") }}"></script>  
+{% endblock %}

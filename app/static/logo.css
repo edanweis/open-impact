@@ -1,0 +1,98 @@
+/* =============================================================================
+For D3 logo
+========================================================================== */
+
+.node {
+	stroke: none;
+	stroke-width: 0;
+	r: 40px;
+	fill: rgba(238, 79, 85, 0.75);
+	cursor: pointer !important;
+}
+
+.link {
+	stroke: #fff;
+	stroke-width: 2;
+	stroke-opacity: 1;
+
+}
+
+.anchorNode text{
+	font-family: "Arial";
+	font-size: 14px;
+	color: #6d6d6d;
+	pointer-events:none !important;
+	opacity: .75;
+}
+
+
+
+#chart path {
+	stroke: #fff;
+	stroke-width: 0px;
+	fill: #000;
+}
+
+#chart circle {
+	stroke: none;
+	opacity: 0;
+	z-index: 100;
+
+}
+
+#chart line {
+	stroke: #fff;
+	pointer-events: none;
+	stroke-width: 1.5px;
+	fill: #00F
+}
+
+.logo-container {
+	position: relative;
+	width: 100%;
+	z-index: 0;
+	margin-bottom:0em;
+	/*margin-left:-0.5em;*/
+
+}
+
+.chart {
+	position: absolute;
+	/*margin-left: 170px;*/
+	/*margin-top: 12%;/*180px*/
+
+	/*height: 480px;*/
+	top: -200px;
+	left: -100px;
+	z-index: 0;
+}
+
+.logo-text {
+	/*margin-left:-0.5em;*/
+	font-size: 4.5em;
+	vertical-align: text-bottom;
+	pointer-events: none;
+	/*margin-top: 360px;*/
+	/*padding-bottom: 1em;*/
+	text-align: center;
+	font-family: 'Simple-bold';
+	color: #392D22;
+	line-height: 1.2em;
+	-moz-opacity: .75;
+	filter: alpha(opacity=75);
+	opacity: .75;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+	-webkit-text-stroke: 0.35px;
+	/*text-shadow: 0 2px 3px rgba(80, 77, 68, 0.5);*/
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.55), 0px -1px 1px rgba(0, 0, 0, 0.48);
+	word-spacing: 1em;
+	z-index: 0;
+	/*left: 0.4em;*/
+}
+

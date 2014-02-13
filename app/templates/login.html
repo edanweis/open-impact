@@ -1,0 +1,49 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block logo %}
+<div class="logo-vertical-spacer"></div> <!-- start logo --> <div class="logo-container"> <svg id="chart" width="100%" height="340" viewBox="0 0 340 340" perserveAspectRatio="xMinYMid" class="chart"></svg> </div> <div class="logo-text"> O<div style="margin-left:-0.07em; display:inline">P</div><div style="margin-left:-0.07em; display:inline">E</div>N IMP<div style="margin-left:-0.07em; display:inline">A</div><div style="margin-left:-0.07em; display:inline">C</div><div style="margin-left:-0.07em; display:inline">T</div> <!-- <span style="font-family: ALPHA-Regular; font-size: 1em; color:#577AE0 !important; margin-left:0.1em; text-shadow: none">a</span> --> </div> <!-- end logo -->
+{% endblock logo %}
+
+
+{% block content %}
+<script type="text/javascript">
+function set_openid(openid, pr)
+{
+  u = openid.search('<username>');
+  if (u != -1) {
+        // openid requires username
+        user = prompt('Enter your ' + pr + ' username:');
+        openid = openid.substr(0, u) + user;
+      }
+      form = document.forms['login'];
+      form.elements['openid'].value = openid;
+    }
+    </script>
+
+    <div class="row top-buffer-lg">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <form action="" class="form form-horizontal" method="post" name="login" role="form">{{form.hidden_tag()}}
+          <div class="input-group-lg input-group">
+
+            {{form.openid(size=5, id='openid-input', class_='form-control', placeholder='type your OpenID here, or authenticate using another account')}}</form><span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-sign-in"></i> Sign in</button></span></div>
+            {% for error in form.errors.openid %}
+            <span class="label label-danger">{{error}}</span>
+            {% endfor %}
+            <p class="text-left" style="margin-bottom:5em; margin-top:1em">
+             {{form.remember_me}} Remember me
+           </p>
+
+           <div class=''>
+            <div class="">
+              <h4>Select one of your accounts</h4>
+              <a class="sign-in-icon" href="javascript:set_openid('https://www.google.com/accounts/o8/id', 'Google');" style="color:#457FED">1</a>
+              <a class="sign-in-icon" href="#facebook" style="color:#3C5A99">2</a>
+              <a class="sign-in-icon" href="#linkedin" style="color:#007BB6">4</a>
+              <a class="sign-in-icon" href="#twitter" style="color:#2AA9E0">3</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {% endblock %}

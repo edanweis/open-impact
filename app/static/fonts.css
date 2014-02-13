@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'sign-in-iconsregular';
+    src: url('fonts/sign-in-icons-webfont.eot');
+    src: url('fonts/sign-in-icons-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/sign-in-icons-webfont.woff') format('woff'),
+         url('fonts/sign-in-icons-webfont.ttf') format('truetype'),
+         url('fonts/sign-in-icons-webfont.svg#sign-in-iconsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'proxima_nova_rgregular';
+    src: url('fonts/proximanova-regular-webfont.eot');
+    src: url('fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/proximanova-regular-webfont.woff') format('woff'),
+         url('fonts/proximanova-regular-webfont.ttf') format('truetype'),
+         url('fonts/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg'),
+         url('fonts/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+   
+}
+
+@font-face {
+	font-family: 'Simple-Bold';
+	src: url('fonts/simple-bold.eot');
+	src: url('fonts/simple-bold.eot?#iefix') format('embedded-opentype'),
+	url('fonts/simple-bold.woff') format('woff'),
+	url('fonts/simple-bold.ttf') format('truetype'),
+	url('fonts/simple-bold.svg#simple') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'OntologyIcons-Normal';
+	src: url('fonts/ontologyicons.eot');
+	src: url('fonts/ontologyicons.eot?#iefix') format('embedded-opentype'),
+			 url('fonts/ontologyicons.woff') format('woff'),
+			 url('fonts/ontologyicons.ttf') format('truetype'),
+			 url('fonts/ontologyicons.svg#ontologyicons') format('svg');
+				
+}
+
+@font-face {
+    font-family: 'geogrotesque_rgregular';
+    src: url('fonts/geogtq-rg-webfont.eot');
+    src: url('fonts/geogtq-rg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/geogtq-rg-webfont.woff') format('woff'),
+         url('fonts/geogtq-rg-webfont.ttf') format('truetype'),
+         url('fonts/geogtq-rg-webfont.svg#geogrotesque_rgregular') format('svg');
+}
+
+
+@font-face {
+    font-family: 'geogrotesque_bdbold';
+    src: url('fonts/geogtq-bd-webfont.eot');
+    src: url('fonts/geogtq-bd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/geogtq-bd-webfont.woff') format('woff'),
+         url('fonts/geogtq-bd-webfont.ttf') format('truetype'),
+         url('fonts/geogtq-bd-webfont.svg#geogrotesque_bdbold') format('svg');
+}
+
+
+.oi {
+  display: inline-block;
+  font-family: OntologyIcons-Normal;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.oi-rdf:before {
+  content: "5";
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  top:3px;
+  left:4px;
+}

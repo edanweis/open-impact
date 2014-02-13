@@ -1,0 +1,78 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+
+{% block logo %}
+{% endblock logo %}
+
+{% block css %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdn.datatables.net/plug-ins/f3e99a6c02/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+{% endblock css %}
+
+
+
+{% block content %}
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 top-buffer-lg">
+    <div class="panel panel-success">
+
+      <div class="panel-heading"><i class="fa fa-user fa-fw"></i> {{user.nickname}} - Profile {% if user.id == g.user.id %} <a class="pull-right" href="{{url_for('edit')}}">Edit</a>{% endif %}</div>
+
+      <div class="panel-body">
+        <a href="#" class="thumbnail pull-left " style="margin:1em 0em 0 1em">
+          <img data-src="holder.js/128x128" src="{{user.avatar(128)}}" alt="Avatar"/>
+        </a>
+
+        <div style="margin:1em" class="pull-right">
+          {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
+        </div>  
+        {% if user.last_seen %}
+        <div style="margin: 1em 0em 0 1em; width:100%" class="pull-left"><p>Last visit: {{moment(user.last_seen).calendar()}}</p></div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-heading"><i class="fa fa-list-ul fa-fw"></i> Queries</div>
+      <div class="panel-body">
+        <table id="userLogTable" class="table table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody >
+           {% for log in logs %}
+            <tr>
+            <th><p>{{log.nlq}}</p></th>
+            <th>{{ moment(log.timestamp).fromTime(now) }}</th>
+            </tr>
+            {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+</div>
+{% endblock %}
+
+
+<table>
+  <tr valign="top">
+    <td><img src="{{post.author.avatar(50)}}"></td><td><i>{{post.author.nickname}} says:</i><br>{{post.body}}</td>
+  </tr>
+</table>
+
+
+{% block scripts %}
+<script src="//cdn.datatables.net/1.10.0-beta.1/js/jquery.dataTables.js"></script> 
+<script src="//cdn.datatables.net/plug-ins/f3e99a6c02/integration/bootstrap/3/dataTables.bootstrap.js"></script> 
+<script src="{{ url_for('static', filename="script-user.js") }}"></script>  
+
+{% endblock scripts %}
