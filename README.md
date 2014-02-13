@@ -4,7 +4,7 @@ Open Impact
 ===
 Free and Open Data on the social impact of design
 ---
-![Open Impact](https://github.com/edanweis/open-impact/blob/master/oi_avatar.jpg)
+![Open Impact](https://github.com/edanweis/open-impact/raw/master/oi_avatar.jpg)
 
 
 Dependencies (see requirements.txt)
