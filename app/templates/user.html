@@ -1,78 +1,56 @@
-<!-- extend base layout -->
 {% extends "base.html" %}
+{% import "_macros.html" as macros %}
 
+{% block title %}Flasky - {{ user.username }}{% endblock %}
 
-{% block logo %}
-{% endblock logo %}
-
-{% block css %}
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-<link href="//cdn.datatables.net/plug-ins/f3e99a6c02/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-{% endblock css %}
-
-
-
-{% block content %}
-
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2 top-buffer-lg">
-    <div class="panel panel-success">
-
-      <div class="panel-heading"><i class="fa fa-user fa-fw"></i> {{user.nickname}} - Profile {% if user.id == g.user.id %} <a class="pull-right" href="{{url_for('edit')}}">Edit</a>{% endif %}</div>
-
-      <div class="panel-body">
-        <a href="#" class="thumbnail pull-left " style="margin:1em 0em 0 1em">
-          <img data-src="holder.js/128x128" src="{{user.avatar(128)}}" alt="Avatar"/>
-        </a>
-
-        <div style="margin:1em" class="pull-right">
-          {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
-        </div>  
-        {% if user.last_seen %}
-        <div style="margin: 1em 0em 0 1em; width:100%" class="pull-left"><p>Last visit: {{moment(user.last_seen).calendar()}}</p></div>
+{% block page_content %}
+<div class="page-header">
+    <img class="img-rounded profile-thumbnail" src="{{ user.email | gravatar(size=256) }}">
+    <div class="profile-header">
+        <h1>{{ user.username }}</h1>
+        {% if user.name or user.location %}
+        <p>
+            {% if user.name %}{{ user.name }}<br>{% endif %}
+            {% if user.location %}
+                From <a href="http://maps.google.com/?q={{ user.location }}">{{ user.location }}</a><br>
+            {% endif %}
+        </p>
         {% endif %}
-      </div>
+        {% if current_user.is_administrator() %}
+        <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+        {% endif %}
+        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+        <p>Member since {{ moment(user.member_since).format('L') }}. Last seen {{ moment(user.last_seen).fromNow() }}.</p>
+        <p>{{ user.posts.count() }} blog posts. {{ user.comments.count() }} comments.</p>
+        <p>
+            {% if current_user.can(Permission.FOLLOW) and user != current_user %}
+                {% if not current_user.is_following(user) %}
+                <a href="{{ url_for('.follow', username=user.username) }}" class="btn btn-primary">Follow</a>
+                {% else %}
+                <a href="{{ url_for('.unfollow', username=user.username) }}" class="btn btn-default">Unfollow</a>
+                {% endif %}
+            {% endif %}
+            <a href="{{ url_for('.followers', username=user.username) }}">Followers: <span class="badge">{{ user.followers.count() - 1 }}</span></a>
+            <a href="{{ url_for('.followed_by', username=user.username) }}">Following: <span class="badge">{{ user.followed.count() - 1 }}</span></a>
+            {% if current_user.is_authenticated() and user != current_user and user.is_following(current_user) %}
+            | <span class="label label-default">Follows you</span>
+            {% endif %}
+        </p>
+        <p>
+            {% if user == current_user %}
+            <a class="btn btn-default" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
+            {% endif %}
+            {% if current_user.is_administrator() %}
+            <a class="btn btn-danger" href="{{ url_for('.edit_profile_admin', id=user.id) }}">Edit Profile [Admin]</a>
+            {% endif %}
+        </p>
     </div>
-    <div class="panel">
-      <div class="panel-heading"><i class="fa fa-list-ul fa-fw"></i> Queries</div>
-      <div class="panel-body">
-        <table id="userLogTable" class="table table-striped" cellspacing="0" width="100%">
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody >
-           {% for log in logs %}
-            <tr>
-            <th><p>{{log.nlq}}</p></th>
-            <th>{{ moment(log.timestamp).fromTime(now) }}</th>
-            </tr>
-            {% endfor %}
-          
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
 </div>
+<h3>Posts by {{ user.username }}</h3>
+{% include '_posts.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.user', username=user.username) }}
 </div>
+{% endif %}
 {% endblock %}
-
-
-<table>
-  <tr valign="top">
-    <td><img src="{{post.author.avatar(50)}}"></td><td><i>{{post.author.nickname}} says:</i><br>{{post.body}}</td>
-  </tr>
-</table>
-
-
-{% block scripts %}
-<script src="//cdn.datatables.net/1.10.0-beta.1/js/jquery.dataTables.js"></script> 
-<script src="//cdn.datatables.net/plug-ins/f3e99a6c02/integration/bootstrap/3/dataTables.bootstrap.js"></script> 
-<script src="{{ url_for('static', filename="script-user.js") }}"></script>  
-
-{% endblock scripts %}

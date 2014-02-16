@@ -1,23 +1,35 @@
-<!-- extend base layout -->
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
-{% block logo %}
-<div class="row">
-        <div class="logo-vertical-spacer"></div>
-        <!-- start logo -->
-        <div class="logo-container">
-          <svg id="chart" width="100%" height="340" viewBox="0 0 340 340" perserveAspectRatio="xMinYMid" class="chart"></svg>
-      </div>
-      <div class="logo-text">
-          O<div style="margin-left:-0.07em; display:inline">P</div><div style="margin-left:-0.07em; display:inline">E</div>N    IMP<div style="margin-left:-0.07em; display:inline">A</div><div style="margin-left:-0.07em; display:inline">C</div><div style="margin-left:-0.07em; display:inline">T</div>
-          <!-- <span style="font-family: ALPHA-Regular; font-size: 1em; color:#577AE0 !important; margin-left:0.1em; text-shadow: none">a</span> -->
-      </div>
-      <!-- end logo -->
-    </div>
+{% block title %}Flasky{% endblock %}
 
-{% endblock logo %}
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, {% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
+</div>
+<div>
+    {% if current_user.can(Permission.WRITE_ARTICLES) %}
+    {{ wtf.quick_form(form) }}
+    {% endif %}
+</div>
+<div class="post-tabs">
+    <ul class="nav nav-tabs">
+        <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">All</a></li>
+        {% if current_user.is_authenticated() %}
+        <li{% if show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">Followers</a></li>
+        {% endif %}
+    </ul>
+    {% include '_posts.html' %}
+</div>
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.index') }}
+</div>
+{% endif %}
+{% endblock %}
 
-{% block content %}
-
-{% endblock content %}
-
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
